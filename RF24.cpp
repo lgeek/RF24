@@ -506,6 +506,9 @@ bool RF24::write( const void* buf, uint8_t len )
 
 void RF24::startWrite( const void* buf, uint8_t len )
 {
+  // Put the radio in Standby-I mode
+  ce(LOW);
+
   // Transmitter power-up
   write_register(CONFIG, ( read_register(CONFIG) | _BV(PWR_UP) ) & ~_BV(PRIM_RX) );
   delayMicroseconds(150);
